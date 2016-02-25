@@ -42,3 +42,4 @@ Home Assistant JS can be compiled with the DEMO flag enabled. This will override
 [mdn-eventsource]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
 [mdn-history]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [google-speechrecognition]: https://developers.google.com/web/updates/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
+# home-assistant-js-OTP
