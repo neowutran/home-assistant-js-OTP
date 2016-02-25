@@ -5,6 +5,7 @@ const INSTANCE = new Store({
   getInitialState() {
     return toImmutable({
       authToken: null,
+      otp: null,
       host: '',
     });
   },
@@ -19,8 +20,8 @@ const INSTANCE = new Store({
 
 export default INSTANCE;
 
-function validateSuccess(state, { authToken, host }) {
-  return toImmutable({ authToken, host });
+function validateSuccess(state, { authToken, otp, host }) {
+  return toImmutable({ authToken, otp, host });
 }
 
 function logOut() {

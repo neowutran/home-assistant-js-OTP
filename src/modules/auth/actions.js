@@ -14,16 +14,18 @@ const DEFAULT_ERROR_MSG = 'Unexpected result from API';
  *   - rememberLogin: to store login in local storage (default: false)
  *   - host: host to target for API calls
  */
-export function validate(reactor, authToken, {
+export function validate(reactor, authToken, otp, {
     useStreaming = reactor.evaluate(streamGetters.isSupported),
     rememberAuth = false,
     host = '',
   } = {}) {
-  reactor.dispatch(actionTypes.VALIDATING_AUTH_TOKEN, { authToken, host });
+  console.log("otp:");
+  console.log(otp);
+  reactor.dispatch(actionTypes.VALIDATING_AUTH_TOKEN, { authToken, otp, host });
 
   syncActions.fetchAll(reactor).then(
     () => {
-      reactor.dispatch(actionTypes.VALID_AUTH_TOKEN, { authToken, host, rememberAuth });
+      reactor.dispatch(actionTypes.VALID_AUTH_TOKEN, { authToken, host, otp, rememberAuth });
 
       if (__DEMO__) {
         // Show as if streaming active in UI

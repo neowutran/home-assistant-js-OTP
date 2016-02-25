@@ -4,13 +4,21 @@ import { getters as authGetters } from '../auth';
 
 let callApi = function callApi(reactor, method, path, parameters = null) {
   const authInfo = reactor.evaluate(authGetters.authInfo);
+  const otpInfo = reactor.evaluate(authGetters.otpInfo);
+
 
   const url = `${authInfo.host}/api/${path}`;
 
   return new Promise((resolve, reject) => {
     const req = new XMLHttpRequest();
     req.open(method, url, true);
+
+    console.log(authGetters);
+    console.log(authInfo);
+    console.log(otpInfo);
     req.setRequestHeader('X-HA-access', authInfo.authToken);
+    req.setRequestHeader('OTP', otpInfo.otp);
+
 
     req.onload = () => {
       let content;

@@ -9,6 +9,7 @@ const INSTANCE = new Store({
     return toImmutable({
       isValidating: false,
       authToken: false,
+      otp: false,
       host: null,
       isInvalid: false,
       errorMessage: '',
@@ -28,9 +29,10 @@ export default INSTANCE;
 
 // using True as string to workaround a bug.
 
-function startValidate(state, { authToken, host }) {
+function startValidate(state, { authToken, otp, host }) {
   return toImmutable({
     authToken,
+    otp,
     host,
     isValidating: true,
     isInvalid: false,
