@@ -32,8 +32,21 @@ serviceApiActions.callTurnOff = function callTurnOff(reactor, entityId, params =
     reactor, 'homeassistant', 'turn_off', { ...params, entity_id: entityId });
 };
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
 serviceApiActions.callService = function callService(reactor, domain, service, params = {}) {
-  return callApi(reactor, 'POST', `services/${domain}/${service}`, params).then(
+  var csrf = getCookie("sessionId");
+  console.log(csrf);
+  return callApi(reactor, 'POST', `services/${domain}/${service}?csrf=`+csrf, params).then(
     (states) => {
       if (service === 'turn_on' && params.entity_id) {
         notificationActions.createNotification(
